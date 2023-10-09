@@ -1,0 +1,30 @@
+# Write a GitHub workflow that runs daily at 9:00 AM UTC
+
+name: Daily Run
+on: 
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Install Dependencies
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y libxss1 libappindicator1 libindicator7 unzip
+            sudo apt-get install libasound2 libatk-bridge2.0-0 libdrm2 libgbm1 libgtk-3-0 libxcomposite1 libxdamage1 libxrandr2
+
+        - name: Install Python dependencies
+          run: pip install selenium requests
+
+        - name: Run daily script
+          run: python3 mortgage.py
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            PURCHASE_PRICE: ${{ secrets.PURCHASE_PRICE }}
+            DOWN_PAYMENT: ${{ secrets.DOWN_PAYMENT }}
