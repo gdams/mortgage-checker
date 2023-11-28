@@ -54,7 +54,7 @@ driver.find_element(By.CSS_SELECTOR, ".iXlUzX > .sc-gEvEer").click()
 # wait until the element is clickable
 wait.until(expected_conditions.element_to_be_clickable((By.ID, "rateCheckerPropertyPrice")))
 driver.find_element(By.ID, "rateCheckerPropertyPrice").click()
-driver.find_element(By.ID, "rateCheckerPropertyPrice").send_keys(total_amount)
+driver.find_element(By.ID, "rateCheckerPropertyPrice").send_keys(purchase_price)
 # wait for element to exist
 driver.find_element(By.CSS_SELECTOR, ".iXlUzX").click()
 wait.until(expected_conditions.element_to_be_clickable((By.ID, "rateCheckerDeposit")))
